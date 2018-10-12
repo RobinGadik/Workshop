@@ -1,6 +1,5 @@
 package it.sevenbits.workshop12.matrix;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Matrix {
@@ -12,14 +11,23 @@ public class Matrix {
         fillMatrixByRandomValues();
     }
 
-    private void fillMatrixByRandomValues(){
+    private void fillMatrixByRandomValues() {
         Random r = new Random();
 
-        for(int x=0;x<matrix.length;x++){
-            for(int y=0;y<matrix[x].length;y++){
+        for (int x = 0; x < matrix.length; x++) {
+            for (int y = 0; y < matrix[x].length; y++) {
                 int cellValue = r.nextInt(CELL_MAX_VALUE);
-                Cell newCell = new Cell(x,y,cellValue);
+                Cell newCell = new Cell(x, y, cellValue);
                 matrix[x][y] = newCell;
+            }
+        }
+    }
+
+    public Matrix(Matrix m) {
+        this.matrix = new Cell[m.matrix.length][m.matrix[0].length];
+        for (int x = 0; x < matrix.length; x++) {
+            for (int y = 0; y < matrix[x].length; y++) {
+                matrix[x][y] = new Cell(x, y, m.matrix[x][y].getValue());
             }
         }
     }
@@ -28,8 +36,8 @@ public class Matrix {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for(int x=0;x<matrix.length;x++){
-            for(int y=0;y<matrix[x].length;y++){
+        for (int x = 0; x < matrix.length; x++) {
+            for (int y = 0; y < matrix[x].length; y++) {
                 sb.append(matrix[x][y].getValue()).append(" ");
             }
             sb.append("\n");
@@ -39,9 +47,9 @@ public class Matrix {
         return sb.toString();
     }
 
-    public void inverseMatrix(){
-        for(int x=0;x<matrix.length;x++){
-            for(int y=0;y<matrix[x].length;y++){
+    public void inverseMatrix() {
+        for (int x = 0; x < matrix.length; x++) {
+            for (int y = 0; y < matrix[x].length; y++) {
                 matrix[x][y].inverse();
             }
         }

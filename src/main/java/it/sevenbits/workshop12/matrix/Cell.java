@@ -26,7 +26,7 @@ class Cell {
         return value;
     }
 
-    public void inverse(){
+    public void inverse() {
         value = -value;
     }
 }
