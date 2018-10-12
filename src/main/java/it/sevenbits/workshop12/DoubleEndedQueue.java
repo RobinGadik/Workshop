@@ -58,7 +58,8 @@ public class DoubleEndedQueue {
             last = first;
         }
         else {
-            first.setPrev(new Node<Matrix>(m, null, first));
+            first.setPrev(new Node<Matrix>(m, first, null));
+            first = first.getPrev();
         }
 
     }
@@ -70,7 +71,8 @@ public class DoubleEndedQueue {
             last = first;
         }
         else {
-            last.setNext(new Node<Matrix>(m, null, first));
+            last.setNext(new Node<Matrix>(m, null , last));
+            last = last.getNext();
         }
     }
 
@@ -78,8 +80,8 @@ public class DoubleEndedQueue {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for(Node<Matrix> i = first;i!=null;i = i.getNext()){
-            sb.append(i.getElement().toString()).append("\n\n");
+        for(Node<Matrix> i = first;i != null;i = i.getNext()){
+            sb.append(i.getElement().toString()).append("\n");
         }
 
         return sb.toString();
