@@ -2,14 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>workshop</artifactId>
+        <groupId>7bits</groupId>
+        <version>1.2</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>7bits</groupId>
-    <artifactId>workshop</artifactId>
-    <packaging>pom</packaging>
-    <version>1.2</version>
-    <modules>
-        <module>RogueLike Game</module>
-    </modules>
+    <artifactId>RogueLike_Game</artifactId>
+
 
 </project>
