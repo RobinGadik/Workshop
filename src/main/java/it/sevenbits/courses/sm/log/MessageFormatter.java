@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class MessageFormatter {
 
-    Map<String, String> map;
+    private Map<String, String> map;
 
     public MessageFormatter() {
         map = new HashMap<>();
