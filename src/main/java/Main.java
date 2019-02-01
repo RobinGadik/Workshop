@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,14 +15,24 @@ class Main {
             e.printStackTrace();
             return;
         }
-
+        BufferedWriter writer = null;
+        try {
+             writer = new BufferedWriter(new FileWriter("1.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int j = 0;
         try {
             for (File i : Files.walk(Paths.get(a))
                     .map(Path::toFile)
                     .collect(Collectors.toList())
                     ) {
-                System.out.println(i.getName() + " , " + (i.isDirectory() ? "Directory" : "File") +
-                        (i.canRead() && i.canWrite() ? ", RWX " : ", NOT RWX") + " , " + i.getAbsolutePath());
+                writer.write(i.getName() + " , " + (i.isDirectory() ? "Directory" : "File") +
+                        (i.canRead() && i.canWrite() ? ", RWX " : ", NOT RWX") + " , " + i.getAbsolutePath() + "\n");
+                j++;
+                if ( j % 5 == 0) {
+                    writer.flush();
+                }
             }
 
         } catch (IOException e) {
