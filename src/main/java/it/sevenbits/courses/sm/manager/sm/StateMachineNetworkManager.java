@@ -1,14 +1,18 @@
 package it.sevenbits.courses.sm.manager.sm;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import it.sevenbits.courses.sm.log.MessageFormatter;
 import it.sevenbits.courses.sm.manager.INetworkManager;
 import it.sevenbits.courses.sm.manager.cmds.*;
 import it.sevenbits.courses.sm.manager.NetworkManagerException;
 import it.sevenbits.courses.sm.network.INetwork;
+import it.sevenbits.courses.sm.network.Network;
 import it.sevenbits.courses.sm.network.NetworkPackage;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class StateMachineNetworkManager implements INetworkManager {
 
@@ -16,8 +20,10 @@ public class StateMachineNetworkManager implements INetworkManager {
     private final long TIMEOUT = 500;
     private final StateTransition stateTransition;
     private Map<String, INetworkManagerCommand> map;
-
     private Pair<StringBuilder, StringBuilder> buffer;
+
+    private MessageFormatter mf = new MessageFormatter();
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(Network.class.getName());
 
     public StateMachineNetworkManager() {
         this.stateTransition = new StateTransition();
@@ -50,9 +56,7 @@ public class StateMachineNetworkManager implements INetworkManager {
                     buffer.getSecond().append(p.getMessage());
                     map.get(currentState.toString()).execute();
 
-                    //TODO: add packages logging (use MessageFormatter)
-
-
+                    LOGGER.info(String.format(mf.getStringFormatByType(p.getType()), p.getMessage()));
                     System.out.println(String.format("%1$s: %2$s", p.getType(), currentState.toString()));
 
                 }
@@ -60,14 +64,14 @@ public class StateMachineNetworkManager implements INetworkManager {
                 Thread.sleep(TIMEOUT);
             }
         } catch (InterruptedException e){
-            // TODO:: add error log
+            LOGGER.error("Network manager was interrupted unexpectedly");
             throw new NetworkManagerException("Network manager was interrupted unexpectedly", e);
         }
     }
 
     @Override
     public void stop() {
-        // TODO:: add log
+        LOGGER.info("StateMachine is Interrupted");
         isInterrupted = true;
     }
 }

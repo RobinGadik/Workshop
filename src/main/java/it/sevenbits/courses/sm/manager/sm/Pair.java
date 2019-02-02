@@ -7,7 +7,7 @@ public final class Pair<T, U> {
     private final T first;
     private final U second;
 
-    public Pair(final T first, final U second) {
+    Pair(final T first, final U second) {
         this.first = first;
         this.second = second;
     }
