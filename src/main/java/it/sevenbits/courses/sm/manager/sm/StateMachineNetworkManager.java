@@ -1,10 +1,9 @@
 package it.sevenbits.courses.sm.manager.sm;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.sevenbits.courses.sm.log.MessageFormatter;
 import it.sevenbits.courses.sm.manager.INetworkManager;
-import it.sevenbits.courses.sm.manager.cmds.*;
 import it.sevenbits.courses.sm.manager.NetworkManagerException;
+import it.sevenbits.courses.sm.manager.cmds.*;
 import it.sevenbits.courses.sm.network.INetwork;
 import it.sevenbits.courses.sm.network.Network;
 import it.sevenbits.courses.sm.network.NetworkPackage;
@@ -12,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 public class StateMachineNetworkManager implements INetworkManager {
 
